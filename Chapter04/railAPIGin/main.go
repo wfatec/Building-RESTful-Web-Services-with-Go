@@ -5,9 +5,9 @@ import (
 	"log"
 	"net/http"
 
+	"../dbutils"
 	"github.com/gin-gonic/gin"
 	_ "github.com/mattn/go-sqlite3"
-	"github.com/narenaryan/dbutils"
 )
 
 // DB Driver visible to whole program

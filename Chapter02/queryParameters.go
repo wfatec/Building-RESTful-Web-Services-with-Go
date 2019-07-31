@@ -19,7 +19,7 @@ func main() {
 	// Create a new router
 	r := mux.NewRouter()
 	// Attach an elegant path with handler
-	r.HandleFunc("/articles", QueryHandler)
+	//r.HandleFunc("/articles", QueryHandler)
 	r.Queries("id", "category")
 	srv := &http.Server{
 		Handler: r,

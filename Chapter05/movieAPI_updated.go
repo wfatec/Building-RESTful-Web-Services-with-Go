@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	mgo "gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -97,7 +97,15 @@ func (db *DB) DeleteMovie(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	session, err := mgo.Dial("127.0.0.1")
+	dialInfo := &mgo.DialInfo{
+		Addrs: []string{"localhost:27017"}, //远程(或本地)服务器地址及端口号
+		Direct: false,
+		Timeout: time.Second * 1,
+		Username: "admin",
+		Password: "admin",
+		PoolLimit: 4096, // Session.SetPoolLimit
+	}
+	session, err := mgo.DialWithInfo(dialInfo)
 	c := session.DB("appdb").C("movies")
 	db := &DB{session: session, collection: c}
 	if err != nil {
